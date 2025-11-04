@@ -1,0 +1,32 @@
+{
+  "name": "easyoutdooroffice/app",
+  "description": "The complete repository for the whole EasyOutdoorOffice application",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "8.3.*",
+    "atk4/data": "6.*",
+    "philippgrashoff/atkdatamodeltraits": "6.*",
+    "philippgrashoff/secondarymodelforatk": "6.*",
+    "philippgrashoff/mtomforatk": "6.*",
+    "philippgrashoff/atkuicontrols": "6.*",
+    "philippgrashoff/fileforatk": "6.*",
+    "philippgrashoff/tokenforatk": "6.*",
+    "philippgrashoff/cronforatk": "6.*",
+    "philippgrashoff/atkuitemplate": "6.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "12.*",
+    "phpstan/phpstan": "2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Expenses\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Expenses\\Tests\\": "tests"
+    }
+  }
+}
