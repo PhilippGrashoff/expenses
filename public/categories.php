@@ -4,6 +4,7 @@ use Expenses\Ui\App;
 use Expenses\Ui\CategoryPage;
 
 include dirname(__DIR__) . '/vendor/autoload.php';
+include dirname(__DIR__) . '/config_local.php';
 
 $app = new App();
 CategoryPage::addTo($app);

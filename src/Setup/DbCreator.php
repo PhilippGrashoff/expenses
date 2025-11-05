@@ -111,8 +111,8 @@ class DbCreator
         if ($this->verbose) {
             echo 'creating foreign keys' . PHP_EOL;
         }
-        (new Migrator($this->persistence))->createForeignKey((new Expense($this->persistence))->getReference(Category::class));
-        (new Migrator($this->persistence))->createForeignKey((new Expense($this->persistence))->getReference(User::class));
+        (new Migrator($this->persistence))->createForeignKey((new Expense($this->persistence))->getReference('category_id'));
+        (new Migrator($this->persistence))->createForeignKey((new Expense($this->persistence))->getReference('user_id'));
     }
 
     protected function createAdditionalIndexes(): void

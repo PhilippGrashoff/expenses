@@ -15,7 +15,7 @@ services:
     container_name: phpmyadmin-expenses
     hostname: phpmyadmin-expenses
     environment:
-      PMA_HOST: mariadb
+      PMA_HOST: mariadb-expenses
       UPLOAD_LIMIT: 512M
     ports:
       - "11999:80"

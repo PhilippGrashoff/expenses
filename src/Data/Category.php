@@ -15,8 +15,8 @@ class Category extends Model
         $this->addField(
             'name',
             [
-                'type' => 'date',
-                'caption' => 'Datum'
+                'type' => 'string',
+                'caption' => 'Name der Kategorie'
             ]
         );
         $this->addField(
