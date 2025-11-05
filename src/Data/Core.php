@@ -243,4 +243,9 @@ class Core
 
         return $this->persistence;
     }
+
+    public static function getBaseUrl(): string
+    {
+        return BASE_URL;
+    }
 }
