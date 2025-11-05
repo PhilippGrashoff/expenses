@@ -2,6 +2,7 @@
 
 namespace Expenses\Setup;
 
+use Atk4\Data\Model;
 use Atk4\Data\Persistence;
 use Atk4\Data\Schema\Migrator;
 use Expenses\Data\Category;
@@ -47,6 +48,7 @@ class DbCreator
         $this->dbal = $this->persistence->getConnection()->getConnection();
     }
 
+    //TODO why not simply Core::get()->getPersistence()?
     protected function getPersistence(): void
     {
         $this->persistence = new Persistence\Sql(
@@ -61,6 +63,7 @@ class DbCreator
         $this->dropDb();
         $this->createDb();
         $this->getPersistence(); //needed after DB drop
+        $this->createExpensesTables();
     }
 
     public function createExpensesTables(): void
@@ -82,7 +85,7 @@ class DbCreator
     protected function createDb(): void
     {
         if ($this->verbose) {
-            echo PHP_EOL . 'creating database ' . $this->dbName . PHP_EOL;
+            echo 'creating database ' . $this->dbName . PHP_EOL;
         }
         $query = "CREATE DATABASE IF NOT EXISTS `" . $this->dbName . "` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci;";
         $this->dbal->executeQuery($query);
@@ -90,19 +93,33 @@ class DbCreator
 
     protected function createTables(): void
     {
-        (new Migrator(new Expense($this->persistence)))->create();
-        (new Migrator(new Category($this->persistence)))->create();
-        (new Migrator(new User($this->persistence)))->create();
+        $this->createTable(new Expense($this->persistence));
+        $this->createTable(new Category($this->persistence));
+        $this->createTable(new User($this->persistence));
+    }
+
+    protected function createTable(Model $model): void
+    {
+        if ($this->verbose) {
+            echo 'creating table ' . $model->table . PHP_EOL;
+        }
+        (new Migrator(new $model($this->persistence)))->create();
     }
 
     protected function createForeignKeys(): void
     {
+        if ($this->verbose) {
+            echo 'creating foreign keys' . PHP_EOL;
+        }
         (new Migrator($this->persistence))->createForeignKey((new Expense($this->persistence))->getReference(Category::class));
         (new Migrator($this->persistence))->createForeignKey((new Expense($this->persistence))->getReference(User::class));
     }
 
     protected function createAdditionalIndexes(): void
     {
+        if ($this->verbose) {
+            echo 'creating additional indexes' . PHP_EOL;
+        }
         (new Migrator($this->persistence))->createIndex(
             [
                 (new Expense($this->persistence))->getField('date'),

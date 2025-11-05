@@ -1,7 +1,10 @@
 <?php declare(strict_types=1);
 
+use Expenses\Ui\App;
 use Expenses\Ui\UserPage;
 
-$app = new \Expenses\Ui\App();
+include dirname(__DIR__) . '/vendor/autoload.php';
+
+$app = new App();
 UserPage::addTo($app);
 $app->run();

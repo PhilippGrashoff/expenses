@@ -2,6 +2,7 @@
 
 namespace Expenses\Data;
 
+use Atk4\Data\Field\PasswordField;
 use Atk4\Data\Model;
 use PhilippR\Atk4\ModelTraits\CryptIdTrait;
 
@@ -23,6 +24,15 @@ class User extends Model
                 'caption' => 'Datum'
             ]
         );
+        $this->addField(
+            'password',
+            [
+                PasswordField::class,
+                'caption' => 'Passwort',
+                'system' => true,
+                'ui' => ['form' => ['inputAttr' => ['autocomplete' => 'new-password']]]
+            ]
+        );
 
         $this->addCryptIdFieldAndHooks('crypt_id');
 
@@ -35,6 +45,14 @@ class User extends Model
         for ($i = 0; $i < 15; $i++) {
             $return .= $this->getRandomChar();
         }
+
         return $return;
+    }
+
+
+    public function setPassword(string $password): static
+    {
+        $this->getField('password')->setPassword($this, $password);
+        return $this;
     }
 }
