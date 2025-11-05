@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+namespace Expenses\Setup;
+
 use Atk4\Data\Persistence;
 use Atk4\Data\Schema\Migrator;
 use Expenses\Data\Category;

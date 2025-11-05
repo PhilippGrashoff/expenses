@@ -2,8 +2,8 @@ services:
   mariadb-expenses:
     image: mariadb:11
     restart: always
-    container_name: mariadb
-    hostname: mariadb
+    container_name: mariadb-expenses
+    hostname: mariadb-expenses
     volumes:
       - ./mariadb/mariadb-entrypoint:/docker-entrypoint-initdb.d
     environment:
@@ -12,8 +12,8 @@ services:
   phpmyadmin-expenses:
     image: phpmyadmin:5.2
     restart: always
-    container_name: phpmyadmin
-    hostname: phpmyadmin
+    container_name: phpmyadmin-expenses
+    hostname: phpmyadmin-expenses
     environment:
       PMA_HOST: mariadb
       UPLOAD_LIMIT: 512M
@@ -21,9 +21,9 @@ services:
       - "11999:80"
 
   php-apache-xdebug-expenses:
-    build: php-apache/php-apache-xdebug
+    build: php-apache/php-apache-xdebug-expenses
     restart: always
-    container_name: php-apache-xdebug
+    container_name: php-apache-xdebug-expenses
     volumes:
       - ../../:/var/www/html
       - ./php-apache/config/php.conf.xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini

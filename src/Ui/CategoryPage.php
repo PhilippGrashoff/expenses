@@ -2,7 +2,9 @@
 
 namespace Expenses\Ui;
 
-class CategoryPage
+use Atk4\Ui\View;
+
+class CategoryPage extends View
 {
 
 }
