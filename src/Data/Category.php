@@ -1,9 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Data;
+namespace Expenses\Data;
 
 use Atk4\Data\Model;
-use Expenses\Data\Expense;
 
 class Category extends Model
 {
@@ -15,12 +14,24 @@ class Category extends Model
         parent::init();
         $this->addField(
             'name',
-            ['type' => 'date', 'caption' => 'Datum']);
+            [
+                'type' => 'date',
+                'caption' => 'Datum'
+            ]
+        );
         $this->addField(
             'description',
-            ['type' => 'string', 'caption' => 'Beschreibung (optional)']
+            [
+                'type' => 'string',
+                'caption' => 'Beschreibung (optional)'
+            ]
         );
 
-        $this->hasMany(Expense::class, ['model' => [Expense::class]]);
+        $this->hasMany(
+            Expense::class,
+            [
+                'model' => [Expense::class]
+            ]
+        );
     }
 }

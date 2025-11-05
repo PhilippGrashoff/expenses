@@ -3,7 +3,6 @@
 namespace Expenses\Data;
 
 use Atk4\Data\Model;
-use Data\Category;
 
 class Expense extends Model
 {
@@ -24,6 +23,22 @@ class Expense extends Model
             ['type' => 'string', 'caption' => 'Beschreibung (optional)']
         );
 
-        $this->hasOne('category_id', ['model' => [Category::class, 'caption' => 'Kategorie']]);
+        $this->hasOne(
+            Category::class,
+            [
+                'model' => [Category::class],
+                'actual' => 'category_id',
+                'caption' => 'Kategorie'
+            ]
+        );
+
+        $this->hasOne(
+            User::class,
+            [
+                'model' => [Category::class],
+                'actual' => 'user_id',
+                'caption' => 'von Benutzer'
+            ]
+        );
     }
 }

@@ -4,5 +4,5 @@ namespace Expenses;
 
 class App extends \Atk4\Ui\App
 {
-    
+
 }
