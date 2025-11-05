@@ -21,9 +21,10 @@ class User extends Model
             'name',
             [
                 'type' => 'string',
-                'caption' => 'Datum'
+                'caption' => 'Name'
             ]
         );
+
         $this->addField(
             'password',
             [
